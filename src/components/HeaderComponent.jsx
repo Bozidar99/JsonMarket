@@ -11,7 +11,7 @@ function HeaderCompnent({setToggleHeader}) {
 
     }
     return (
-        <div className="container mx-auto flex items-center justify-between h-[90px]">
+        <div className="flex flex-col lg:flex-row container mx-auto flex items-center justify-between h-[90px] py-[15px]">
             <div>
                 <p>Need help? Call us: <a href="tel:+(+98) 0234 456 789">(+98) 0234 456 789</a></p>
             </div>
