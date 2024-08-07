@@ -1,3 +1,7 @@
+import { Outlet } from "react-router-dom"
+
+// COMPONENT
+import NavBarComponent from "./components/NavBarComponent"
 
 
 function App() {
@@ -5,7 +9,9 @@ function App() {
 
   return (
     <div >
-      <h1>JSON MARKET</h1>
+      <NavBarComponent />
+      <Outlet />
+      
     </div>
   )
 }
