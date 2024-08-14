@@ -9,6 +9,19 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 //PAGES
 import HomePage from './pages/HomePage.jsx'
 
+//redux & store
+import { Provider } from 'react-redux'
+import store from './store/store.js'
+
+
+// Clerk & KEY
+import { ClerkProvider } from '@clerk/clerk-react'
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+
 const router = createBrowserRouter([
   // APP ROUTER
   {
@@ -18,10 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />
-        
+
       }
     ]
-    
+
   }
 
   // DASHBOARD ROUTER
@@ -29,6 +42,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+        <RouterProvider router={router} />
+      </ClerkProvider>
+    </Provider>
   </React.StrictMode>,
 )

@@ -11,6 +11,8 @@ import { GrFavorite } from "react-icons/gr";
 
 // IMAGES
 import logo from '../assets/logo.png'
+//Clerk
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 
 
@@ -27,7 +29,7 @@ function NavBarComponent() {
                     <img src={logo} alt="logo" />
 
                     {/*Search Component*/}
-                    
+
                     <SearchComponent />
 
                     {/*Login/Cart/Favorites*/}
@@ -36,7 +38,12 @@ function NavBarComponent() {
                             {/*icon*/}
                             <CiUser size={28} color="white" />
                             {/*text */}
-                            <span className="text-whiteColor">Login</span>
+                            <SignedOut>
+                                <SignInButton />
+                            </SignedOut>
+                            <SignedIn>
+                                <UserButton showName />
+                            </SignedIn>
                         </div>
 
                         <div className="flex items-center gap-[5px]">
@@ -49,7 +56,7 @@ function NavBarComponent() {
 
                         <div className="flex items-center gap-[5px]">
                             {/*icon*/}
-                            <CiShoppingCart size={28} color="white"/>
+                            <CiShoppingCart size={28} color="white" />
                             {/*text */}
                             <span className="bg-mainYellow rounded-full text-whiteColor w-[20px] h-[20px] flex items-center justify-center">0</span>
                             <span className="text-whiteColor">Cart</span>
