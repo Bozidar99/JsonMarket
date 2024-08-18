@@ -13,12 +13,15 @@ import { GrFavorite } from "react-icons/gr";
 import logo from '../assets/logo.png'
 //Clerk
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 
 
 function NavBarComponent() {
     const [toggleHeader, setToggleHeader] = useState(true)
+    const {totalProduct} = useSelector((state) => state.cartStore)
     return (
         <div >
             {toggleHeader && <HeaderComponent setToggleHeader={setToggleHeader} />}
@@ -26,7 +29,9 @@ function NavBarComponent() {
             {/*Main Nav */}
             <div className="bg-mainBlue h-full py-[10px] lg:h-[100px]">
                 <div className="container mx-auto flex items-center justify-between h-full flex-col lg:flex-row gap-[15px]">
-                    <img src={logo} alt="logo" />
+                    <Link to='/'>
+                        <img src={logo} alt="logo" />
+                    </Link>
 
                     {/*Search Component*/}
 
@@ -58,8 +63,8 @@ function NavBarComponent() {
                             {/*icon*/}
                             <CiShoppingCart size={28} color="white" />
                             {/*text */}
-                            <span className="bg-mainYellow rounded-full text-whiteColor w-[20px] h-[20px] flex items-center justify-center">0</span>
-                            <span className="text-whiteColor">Cart</span>
+                            <span className="bg-mainYellow rounded-full text-whiteColor w-[20px] h-[20px] flex items-center justify-center">{totalProduct}</span>
+                            <Link to={'/cart'} className="text-whiteColor">Cart</Link>
                         </div>
                     </div>
                 </div>

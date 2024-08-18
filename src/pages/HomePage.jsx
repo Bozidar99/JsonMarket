@@ -20,7 +20,7 @@ function HomePage() {
       )
   })
   return (
-    <div className='flex flex-wrap gap-[20px]'>
+    <div className='flex flex-wrap items-center justify-center mt-[50px] gap-[20px] container mx-auto'>
       {productLoader ? allProducts.map((product) => {
         return <CardProductComponent key={product.id} product={product}/>
       }) : <h1>Loading</h1>}
