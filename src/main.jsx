@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/HomePage.jsx'
 import SingleProduct from './pages/SingleProduct.jsx'
 import CardPage from './pages/CartPage.jsx'
+import FavoritePage from './pages/FavoritePage.jsx'
 
 //redux & store
 import { Provider } from 'react-redux'
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <CardPage />
+      },
+      {
+        path: '/favorite',
+        element: <FavoritePage />
       }
 
     ]

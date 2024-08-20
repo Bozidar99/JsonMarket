@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 function NavBarComponent() {
     const [toggleHeader, setToggleHeader] = useState(true)
     const {totalProduct} = useSelector((state) => state.cartStore)
+    const {totalFavorite} = useSelector((state) => state.favoriteStore)
     return (
         <div >
             {toggleHeader && <HeaderComponent setToggleHeader={setToggleHeader} />}
@@ -55,8 +56,8 @@ function NavBarComponent() {
                             {/*icon*/}
                             <GrFavorite size={28} color="white" />
                             {/*text */}
-                            <span className="bg-mainYellow rounded-full text-whiteColor w-[20px] h-[20px] flex items-center justify-center">0</span>
-                            <span className="text-whiteColor">Favorites</span>
+                            <span  className="bg-mainYellow rounded-full text-whiteColor w-[20px] h-[20px] flex items-center justify-center">{totalFavorite}</span>
+                            <Link to ={'/favorite'} className="text-whiteColor">Favorites</Link>
                         </div>
 
                         <div className="flex items-center gap-[5px]">

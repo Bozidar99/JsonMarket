@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import ProductsService from '../services/ProductsService'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../store/cartSlice'
+import { addToFavorite } from '../store/favoriteSlice'
 
 function SingleProduct() {
     const [singleProduct, setSingleProduct] = useState({})
@@ -48,7 +49,9 @@ function SingleProduct() {
                         <button className='bg-mainYellow px-[20px] py-[10px] rounded-[15px] text-whiteColor hover:bg-mainBlue duration-500 cursor-pointer mt-[10px]'
                         onClick={() => dispatch(addToCart(singleProduct))}
                         >Add to Cart</button>
-                        <button className='bg-mainBlue px-[20px] py-[10px] rounded-[15px] text-whiteColor hover:bg-mainYellow duration-500 cursor-pointer mt-[10px]'>Favorite</button>
+                        <button className='bg-mainBlue px-[20px] py-[10px] rounded-[15px] text-whiteColor hover:bg-mainYellow duration-500 cursor-pointer mt-[10px]'
+                        onClick={() => dispatch(addToFavorite(singleProduct))}
+                        >Favorite</button>
                     </div>
                 </div>
             </div> : <h1>Loading</h1>}
