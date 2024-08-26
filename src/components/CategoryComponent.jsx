@@ -4,6 +4,7 @@ import CategoryServices from '../services/CategoryServices'
 //redux
 import { useDispatch, useSelector } from 'react-redux'
 import { saveAllCategoryAction } from '../store/categorySlice'
+import { saveSelectCatregoryAction } from '../store/productSlice'
 
 function CategoryComponent() {
 
@@ -33,8 +34,17 @@ function CategoryComponent() {
           {toggleCategory ? 'Close Category' : 'Show Category'}
         </button>
         {toggleCategory && <ul className='flex flex-wrap items-center  justify-between gap-[8px] '>
+          <>
+          <li 
+            onClick={() => dispatch(saveSelectCatregoryAction(''))}
+            className='w-[250] bg-mainBlue text-whiteColor text-center rounded-[10px] p-[8px] hover:bg-mainYellow cursor-pointer duration-300'>
+            All category
+          </li>
+          </>
           {categoryLoader ? allCategory.map((cat, index) => {
-            return <li key={index} className='w-[250] bg-mainBlue text-whiteColor text-center rounded-[10px] p-[8px] hover:bg-mainYellow cursor-pointer duration-300'>{cat}</li>
+            return <li key={index} className='w-[250] bg-mainBlue text-whiteColor text-center rounded-[10px] p-[8px] hover:bg-mainYellow cursor-pointer duration-300'
+            onClick={() => dispatch(saveSelectCatregoryAction(cat))}
+            >{cat}</li>
           }) : <h2>Loading...</h2>}
         </ul>}
 

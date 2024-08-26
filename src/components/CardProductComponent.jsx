@@ -1,11 +1,13 @@
 import Rating from '@mui/material/Rating'
 import { Link } from 'react-router-dom'
 
-function CardProductComponent({ product }) {
+function CardProductComponent({ product, isGrid }) {
   return (
-    <div className='border border-textColor rounded-[20px] flex flex-col items-center justify-center py-[20px]'>
+    <div className={isGrid === 'gridView' ? 'border border-textColor rounded-[20px] flex flex-col items-center justify-center py-[20px]'
+      : 'w-full flex items-center border border-textColor justify-center rounded-lg py-[40px] px-[40px] justify-between'
+    }>
       <div className='w-[300px]'>
-        <img src={product.thumbnail} alt='' className='w-full h-[200px] object-cover' />
+        <img src={product.thumbnail} alt='' className='w-full h-[300px] object-cover' />
       </div>
       <h3 className='text-mainBlue font-bold'>{product.title}</h3>
       <h4 className='text-mainBlue font-bold'>${product.price}</h4>

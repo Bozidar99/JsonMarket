@@ -6,15 +6,25 @@ const productSlice = createSlice({
     name: 'product',
     initialState: {
         allProducts: [],
-        productLoader : false
+        productLoader : false,
+        selectCatregory : '',
+        searchProducts : ''
     },
     reducers: {
         saveAllProductsAction: (state, action) => {
             state.allProducts = action.payload
             state.productLoader = true
+        },
+
+        saveSelectCatregoryAction: (state, action) => {
+            state.selectCatregory = action.payload
+        },
+
+        saveSearchProductAction: (state, action) => {
+            state.searchProducts = action.payload
         }
     }
 })
 
-export const {saveAllProductsAction} = productSlice.actions
+export const {saveAllProductsAction, saveSelectCatregoryAction, saveSearchProductAction} = productSlice.actions
 export default productSlice.reducer
