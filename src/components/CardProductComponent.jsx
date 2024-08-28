@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 function CardProductComponent({ product, isGrid }) {
   return (
-    <div className={isGrid === 'gridView' ? 'border border-textColor rounded-[20px] flex flex-col items-center justify-center py-[20px]'
-      : 'w-full flex items-center border border-textColor justify-center rounded-lg py-[40px] px-[40px] justify-between'
+    <div className={isGrid === 'gridView' ? 'border border-textColor rounded-[20px] flex flex-col items-center justify-center py-[20px] mb-[30px]'
+      : 'w-full flex items-center border border-textColor justify-center rounded-lg py-[40px] px-[40px] justify-between mb-[30px]'
     }>
       <div className='w-[300px]'>
         <img src={product.thumbnail} alt='' className='w-full h-[300px] object-cover' />

@@ -29,8 +29,8 @@ function SingleProduct() {
             {isLoding ? <div className='container mx-auto flex flex-col lg:flex-row gap-[40px] lg:gap-[20px]'>
                 {/* left side */}
                 <div className='w-full lg:w-[50%] '>
-                    <img src={singleProduct.images[currentImage]} alt={singleProduct.title} className='w-full h-[400px] object-contain' />
-                    <div className='flex items-center justify-center gap-[20px] mt-[20px]'>
+                    <img src={singleProduct.images[currentImage]} alt={singleProduct.title} className='w-full h-[400px] object-contain ' />
+                    <div className='flex items-center justify-center gap-[20px] mt-[20px] flex-wrap'>
                         {singleProduct.images.map((el, index) => {
                             return <img key={index} src={el} alt={singleProduct.title} className='w-[170px] h-[170px] object-cover border border-textColor px-[5px] rounded-[20px]'
                                 onClick={() => setCurrentImage(index)} />
