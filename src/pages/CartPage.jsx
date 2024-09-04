@@ -6,44 +6,26 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { deleteFromCartAction } from '../store/cartSlice'
 
 function CartPage() {
   const [coupon, setCoupon] = useState('')
-  const [discountedPrice, setDiscountedPrice] = useState(null)
-  const [isCouponApplied, setIsCouponApplied] = useState(false)
+  
 
-  const { cart } = useSelector((state) => state.cartStore);
+  let cart = JSON.parse(localStorage.getItem('cart_item')) || []
+  //const { cart } = useSelector((state) => state.cartStore);
 
-  {/*useEffect(() => {
-    // Provera da li je kupon već primenjen prilikom mount-ovanja komponente
-    const couponApplied = sessionStorage.getItem('couponApplied');
-    if (couponApplied) {
-      setIsCouponApplied(true);
-      setDiscountedPrice(halfPrice());
-    }
-  }, [cart]);*/}
+  const dispatch = useDispatch()
 
-  const handleAplyCoupon = () => {
-    if(coupon === 'alphabozo'){
-      setDiscountedPrice(halfPrice())
-      setIsCouponApplied(true)
-      sessionStorage.setItem('couponApplied', 'true')
-    }else{
-      alert('Cupon not valid')
-    }
+  function handleRemoveProduct(product) {
+     dispatch(deleteFromCartAction(product))
   }
-  function totalPrice() {
-    return (
-      cart.reduce((acc, item) => acc + item.cartTotal, 0)
-    )
-  }
-  {/*function halfPrice() {
-    return (
-      totalPrice() / 2
-    )
-  }*/}
+
+
+
+  
   
 
   return (
@@ -81,7 +63,7 @@ function CartPage() {
                   </TableCell>
                   <TableCell align="right">${product.cartTotal}</TableCell>
                   <TableCell align="right">
-                    <button className='text-red-400'>Remove</button>
+                    <button className='text-red-400' onClick={() => handleRemoveProduct(product)}>Remove</button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -93,7 +75,7 @@ function CartPage() {
         <div className='w-full lg:w-[30%]'>
           <h2 className='text-white font-bold bg-mainBlue px-[20px] py-[15px]'>CART TOTAL</h2>
           <div className='py-[20px] px-[20px]  text-[28] font-extrabold '>
-            <span>Total price: ${ discountedPrice !== null ? discountedPrice : totalPrice() }</span>
+            <span>Total price: ${}</span>
           </div>
 
 
@@ -101,13 +83,12 @@ function CartPage() {
             <input type="text" placeholder='Coupon Code' className='px-[23px] py-[8px] outline-none rounded-[20px] placeholder:textColor border border-textColor items-center justify-center mt-[25px]'
             value={coupon}
             onChange={(e) => setCoupon(e.target.value)}
-            disabled={isCouponApplied}
+            
             />
             <span className='text-mainBlue text-[14px] mt-[10px]'>Insert cupon for 50% discount</span>
             <button className='bg-mainYellow px-[20px] py-[10px] rounded-[15px] text-whiteColor hover:bg-mainBlue duration-500 cursor-pointer mt-[10px]'
-            onClick={handleAplyCoupon}
-            disabled={isCouponApplied}
-            >{/*{isCouponApplied ? 'Coupon Applied' : 'Apply Coupon'}*/} Coupon Applied</button>
+            //onClick={handleAplyCoupon}
+            > Coupon Applied</button>
           </div>
         </div>
       </div>

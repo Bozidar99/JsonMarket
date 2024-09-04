@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 // COMPONENT
 import HeaderComponent from "./HeaderComponent"
 import CategoryComponent from "./CategoryComponent";
@@ -19,9 +19,20 @@ import { useSelector } from "react-redux";
 
 
 
+
 function NavBarComponent() {
     const [toggleHeader, setToggleHeader] = useState(true)
+    const [totalProductLS, setTotalProductLS] = useState(0)
+    //let totalProduct = JSON.parse(localStorage.getItem('cart_total'))
     const {totalProduct} = useSelector((state) => state.cartStore)
+
+    useEffect(() => {
+        let isTotal = JSON.parse(localStorage.getItem('cart_total'))
+        if(totalProduct){
+            setTotalProductLS(isTotal)
+        }
+        
+    }, [totalProduct])
     const {totalFavorite} = useSelector((state) => state.favoriteStore)
     return (
         <div >
@@ -64,7 +75,7 @@ function NavBarComponent() {
                             {/*icon*/}
                             <CiShoppingCart size={28} color="white" />
                             {/*text */}
-                            <span className="bg-mainYellow rounded-full text-whiteColor w-[20px] h-[20px] flex items-center justify-center">{totalProduct}</span>
+                            <span className="bg-mainYellow rounded-full text-whiteColor w-[20px] h-[20px] flex items-center justify-center">{totalProductLS}</span>
                             <Link to={'/cart'} className="text-whiteColor">Cart</Link>
                         </div>
                     </div>
