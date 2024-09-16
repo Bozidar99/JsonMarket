@@ -13,6 +13,8 @@ import { addToCart } from '../store/cartSlice'
 
 function FavoritePage() {
 
+
+  
   const { favorite } = useSelector((state) => state.favoriteStore);
 
   const dispatch = useDispatch()

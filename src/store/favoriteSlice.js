@@ -31,6 +31,7 @@ const favoriteSlice = createSlice({
 
             state.favorite = copyFavorite
             
+            
         }
     }
 })

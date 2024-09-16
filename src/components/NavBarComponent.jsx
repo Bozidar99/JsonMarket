@@ -30,6 +30,8 @@ function NavBarComponent() {
         let isTotal = JSON.parse(localStorage.getItem('cart_total'))
         if(totalProduct){
             setTotalProductLS(isTotal)
+        }else{
+            setTotalProductLS(0)
         }
         
     }, [totalProduct])

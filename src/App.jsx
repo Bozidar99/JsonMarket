@@ -7,6 +7,7 @@ import NavBarComponent from "./components/NavBarComponent"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { addToCart } from "./store/cartSlice"
+import { addToFavorite } from "./store/favoriteSlice"
 
 //axios
 axios.defaults.baseURL = 'https://dummyjson.com'
@@ -22,6 +23,8 @@ function App() {
       });
     }
   }, [])
+
+  
   return (
 
     <div >

@@ -8,23 +8,25 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { deleteFromCartAction } from '../store/cartSlice'
+import {  deleteFromCartAction, setPriceHendlerAction } from '../store/cartSlice'
 
 function CartPage() {
   const [coupon, setCoupon] = useState('')
-  
-
-  let cart = JSON.parse(localStorage.getItem('cart_item')) || []
-  //const { cart } = useSelector((state) => state.cartStore);
+  const [cartData, setCartData] = useState([])
+  const { cart,totalPrice } = useSelector((state) => state.cartStore);
 
   const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    setCartData(JSON.parse(localStorage.getItem('cart_item')) || [])
+  }, [cart])
 
   function handleRemoveProduct(product) {
      dispatch(deleteFromCartAction(product))
   }
-
-
-
+ 
+  
   
   
 
@@ -44,7 +46,7 @@ function CartPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cart.map((product) => (
+              {cartData.map((product,index) => (
                 <TableRow
 
                   key={product.id}
@@ -56,9 +58,9 @@ function CartPage() {
                   <TableCell align="left">${product.price}</TableCell>
                   <TableCell align="left">
                     <div className='flex items-center'>
-                      <button className='px-[8px] py-[4px] bg-slate-300 text-[18px]'>-</button>
+                      <button className='px-[8px] py-[4px] bg-slate-300 text-[18px]' onClick={() => dispatch(setPriceHendlerAction({index, increment: -1}))}>-</button>
                       <span className='px-[8px] py-[4px] bg-slate-300 text-[18px]'>{product.count}</span>
-                      <button className='px-[8px] py-[4px] bg-slate-300 text-[18px]'>+</button>
+                      <button className='px-[8px] py-[4px] bg-slate-300 text-[18px]' onClick={() => dispatch(setPriceHendlerAction({index, increment: +1}))}>+</button>
                     </div>
                   </TableCell>
                   <TableCell align="right">${product.cartTotal}</TableCell>
@@ -75,7 +77,7 @@ function CartPage() {
         <div className='w-full lg:w-[30%]'>
           <h2 className='text-white font-bold bg-mainBlue px-[20px] py-[15px]'>CART TOTAL</h2>
           <div className='py-[20px] px-[20px]  text-[28] font-extrabold '>
-            <span>Total price: ${}</span>
+            <span>Total price: ${totalPrice}</span>
           </div>
 
 
