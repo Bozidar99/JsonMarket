@@ -23,8 +23,10 @@ import { useSelector } from "react-redux";
 function NavBarComponent() {
     const [toggleHeader, setToggleHeader] = useState(true)
     const [totalProductLS, setTotalProductLS] = useState(0)
+    const [totalFavoriteLS, setTotalFavoriteLS] = useState(0)
     //let totalProduct = JSON.parse(localStorage.getItem('cart_total'))
     const {totalProduct} = useSelector((state) => state.cartStore)
+    const {totalFavorite} = useSelector((state) => state.favoriteStore)
 
     useEffect(() => {
         let isTotal = JSON.parse(localStorage.getItem('cart_total'))
@@ -35,7 +37,16 @@ function NavBarComponent() {
         }
         
     }, [totalProduct])
-    const {totalFavorite} = useSelector((state) => state.favoriteStore)
+    useEffect(() => {
+        let isTotal = JSON.parse(localStorage.getItem('favorite_total'))
+        if(totalProduct){
+            setTotalFavoriteLS(isTotal)
+        }else{
+            setTotalFavoriteLS(0)
+        }
+    })
+
+   
     return (
         <div >
             {toggleHeader && <HeaderComponent setToggleHeader={setToggleHeader} />}

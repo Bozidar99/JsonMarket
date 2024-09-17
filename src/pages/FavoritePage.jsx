@@ -8,16 +8,29 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/cartSlice'
+import { deleteFromFavoriteAction } from '../store/favoriteSlice';
+import { useState, useEffect } from 'react';
 
 
 
 function FavoritePage() {
+
+  const [favoriteData, setFavoriteData] = useState([])
+  
 
 
   
   const { favorite } = useSelector((state) => state.favoriteStore);
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setFavoriteData(JSON.parse(localStorage.getItem('favorite_item')) || [])
+  }, [favorite])
+
+  function handleRemoveFavoriteProduct(product) {
+    dispatch(deleteFromFavoriteAction(product))
+  }
 
   return (
     <div className='mt-[50px]'>
@@ -51,7 +64,7 @@ function FavoritePage() {
                   >Add to cart</button>
                 </TableCell>
                 <TableCell align="right">
-                  <button className='text-red-400'>Remove</button>
+                  <button className='text-red-400' onClick={() => handleRemoveFavoriteProduct(product)}>Remove</button>
                 </TableCell>
 
               </TableRow>
