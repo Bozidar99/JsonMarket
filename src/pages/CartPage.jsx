@@ -104,7 +104,8 @@ function CartPage() {
             'bg-mainYellow px-[20px] py-[10px] rounded-[15px] text-whiteColor hover:bg-mainBlue duration-500 cursor-pointer mt-[10px]'}
             onClick={handleActiveCoupon}
             disabled={activeCoupon === 'alphabozo' ? true : false}
-            > Coupon Applied</button>
+            > {activeCoupon === 'alphabozo' ? 'Coupon applied' : 'Apply coupon'}
+            </button>
           </div>
         </div>
       </div>
