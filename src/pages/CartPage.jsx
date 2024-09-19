@@ -9,11 +9,14 @@ import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import {  deleteFromCartAction, setPriceHendlerAction } from '../store/cartSlice'
+import { useRef } from 'react';
 
 function CartPage() {
-  const [coupon, setCoupon] = useState('')
+  const [activeCoupon, setActiveCoupon] = useState('')
   const [cartData, setCartData] = useState([])
   const { cart,totalPrice } = useSelector((state) => state.cartStore);
+
+  const couponRef = useRef()
 
   const dispatch = useDispatch()
 
@@ -24,6 +27,14 @@ function CartPage() {
 
   function handleRemoveProduct(product) {
      dispatch(deleteFromCartAction(product))
+  }
+
+  //handle active cupon
+  function handleActiveCoupon(coupon) {
+    setActiveCoupon(couponRef.current.value)
+
+
+    couponRef.current.value = ''
   }
  
   
@@ -77,19 +88,22 @@ function CartPage() {
         <div className='w-full lg:w-[30%]'>
           <h2 className='text-white font-bold bg-mainBlue px-[20px] py-[15px]'>CART TOTAL</h2>
           <div className='py-[20px] px-[20px]  text-[28] font-extrabold '>
-            <span>Total price: ${totalPrice}</span>
+            <span>Total price: ${activeCoupon === 'alphabozo' ? totalPrice / 2 : totalPrice}</span>
           </div>
 
 
           <div className='flex flex-col items-center justify-between'>
-            <input type="text" placeholder='Coupon Code' className='px-[23px] py-[8px] outline-none rounded-[20px] placeholder:textColor border border-textColor items-center justify-center mt-[25px]'
-            value={coupon}
-            onChange={(e) => setCoupon(e.target.value)}
+            
+            <input ref={couponRef} type="text" placeholder='Coupon Code' className='px-[23px] py-[8px] outline-none rounded-[20px] placeholder:textColor border border-textColor items-center justify-center mt-[25px]'
+            //value={activeCoupon}
+            //onChange={(e) => setActiveCoupon(e.target.value)}
             
             />
             <span className='text-mainBlue text-[14px] mt-[10px]'>Insert cupon for 50% discount</span>
-            <button className='bg-mainYellow px-[20px] py-[10px] rounded-[15px] text-whiteColor hover:bg-mainBlue duration-500 cursor-pointer mt-[10px]'
-            //onClick={handleAplyCoupon}
+            <button className={activeCoupon === 'alphabozo' ? 'bg-gray-300 px-[20px] py-[10px] rounded-[15px] text-black hover:bg-gray-500 duration-500 cursor-pointer mt-[10px]' : 
+            'bg-mainYellow px-[20px] py-[10px] rounded-[15px] text-whiteColor hover:bg-mainBlue duration-500 cursor-pointer mt-[10px]'}
+            onClick={handleActiveCoupon}
+            disabled={activeCoupon === 'alphabozo' ? true : false}
             > Coupon Applied</button>
           </div>
         </div>
